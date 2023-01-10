@@ -409,4 +409,5 @@ ASALocalRun/
 
 obj/*
 obj/Debug/
-WebApplication1/obj/Debug/net5.0/WebApplication1.assets.cache
+
+*WebApplication1.assets.cache
