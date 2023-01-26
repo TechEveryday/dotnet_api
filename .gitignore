@@ -411,3 +411,5 @@ obj/*
 obj/Debug/
 
 *WebApplication1.assets.cache
+WebApplication1/bin/
+WebApplication1/obj/
