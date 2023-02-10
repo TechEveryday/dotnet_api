@@ -9,7 +9,7 @@ namespace WebApplication1.Models
         public DbSet<WeatherForecast> WeatherForecast
         { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("Host=localhost;Database=localdb;Username=user;Password=password");
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // => optionsBuilder.UseNpgsql("Host=localhost;Database=localdb;Username=user;Password=password");
     }
 }

@@ -1,41 +1,29 @@
+version: '3.4'
+
 networks:
   dockerapi-dev:
     driver: bridge
 
 services:
-  migrations:
-    build:
-      context: .
-      dockerfile: .docker/app/Dockerfile
-    environment:
-      - DOTNET_ENVIRONMENT=Development
-      - DB_HOST=pgdb
-      - DB_NAME=localdb
-      - DB_USERNAME=user
-      - DB_PASSWORD=password
-    working_dir: /source/WebApplication1
-    volumes:
-      - ./WebApplication1/migrations:/source/WebApplication1/Migrations
-    networks:
-      - dockerapi-dev
   app:
+    container_name: 'app'
+    depends_on:
+      - "pgdb"
     build:
       context: .
       dockerfile: .docker/app/Dockerfile
     environment:
-      - DOTNET_ENVIRONMENT=Development
-      - DB_HOST=pgdb
-      - DB_NAME=localdb
-      - DB_USERNAME=user
-      - DB_PASSWORD=password
+      DB_CONNECTION_STRING: "Host=pgdb;Port=5432;Database=localdb;Username=user;Password=password"
     volumes:
       - ./WebApplication1:/source/WebApplication1
     ports:
       - "5001:5000"
     networks:
       - dockerapi-dev
+
   pgdb:
-    image: postgres:15.1-alpine
+    container_name: 'pgdb'
+    image: postgres:latest
     ports:
       - "5432:5432"
     environment:

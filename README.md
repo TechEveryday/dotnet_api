@@ -1,19 +1,18 @@
 # dotnet_api
 
-run the following cmd to install the tools needed for interacting with entity framework
-`dotnet tool install --global dotnet-ef`
+Sample API for educational purposes.
 
-# Getting Started
+## Getting Started
 
-## Using Docker
+Run `./scripts/dotnet.sh`
 
-run `./docker.sh`
-In a separate terminal
-run `./migrate.sh`
+This script will do the following
+- build the postgres image
+- build our application
+- update our database
+- run our application
 
-## Not Using Docker
-
-run `./scripts/dotnet.sh`
+Then navigate you should be able to navigate [here](https://localhost:5001/swagger/index.html)
 
 ## To Accesss the database
 
