@@ -4,13 +4,14 @@ WORKDIR /source
 COPY WebApplication1/WebApplication1.csproj WebApplication1/
 COPY WebApplication1/WebApplication1.sln ./
 COPY config/dotnet-tools.json .config/dotnet-tools.json
-RUN dotnet restore "WebApplication1/WebApplication1.csproj"
+RUN dotnet restore "WebApplication1"
+# Need to figure out how to run the update in the container
+RUN dotnet tool restore \
+  dotnet dotnet-ef database update --project WebApplication1
 
 COPY . .
 
 RUN dotnet publish "WebApplication1/WebApplication1.csproj" -c Debug -o /app
-# Need to figure out how to run the update in the container
-# RUN dotnet tool restore && dotnet dotnet-ef database update --project WebApplication1
 
 WORKDIR /app
 
