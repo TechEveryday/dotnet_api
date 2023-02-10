@@ -13,9 +13,7 @@ run `./migrate.sh`
 
 ## Not Using Docker
 
-run `dotnet restore`
-run `dotnet build`
-run `dotnet run`
+run `./scripts/dotnet.sh`
 
 ## To Accesss the database
 
