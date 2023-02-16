@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.Models;
+using WebApplication1.Services;
 
 namespace WebApplication1.Controllers
 {
@@ -19,10 +20,18 @@ namespace WebApplication1.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly PostgresContext _dbContext;
+        private readonly CityForecastService _cfService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(
+            ILogger<WeatherForecastController> logger,
+            PostgresContext dbContext,
+            CityForecastService cfService
+        )
         {
             _logger = logger;
+            _dbContext = dbContext;
+            _cfService = cfService;
         }
 
         [HttpGet]
@@ -57,13 +66,27 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                if (cf == null)
+                // Do some validation
+                if (cf == null || !_cfService.ValidateCityForecastModel(cf))
                     return BadRequest();
+
+                // One example of intereacting with Database directly
+                var newCityForecast = new CityForecast
+                {
+                    Date = cf.Date,
+                    Temperature = cf.Temperature,
+                    Name = cf.Name,
+                    Id = new Guid()
+                };
+
+
+                _dbContext.Add<CityForecast>(newCityForecast);
+                _dbContext.SaveChanges();
 
                 //var createdEmployee = await employeeRepository.AddEmployee(employee);
 
                 return Ok(cf);
-                   
+
             }
             catch (Exception)
             {
@@ -78,6 +101,13 @@ namespace WebApplication1.Controllers
         {
             if (cf != null)
             {
+                // Validate that the cf.Id exists in database
+                // If its doesnt, return BadRequest();
+
+                // If it does, proceed to make changes to the object
+                // Then update row in database with said object
+                // Commit changes via _dbContext.SaveChanges();
+
                 var cityf = new CityForecast() { Date = DateTime.Now, Temperature = 32, Name = "stp", Id = Guid.NewGuid() };
 
                 if (cf.Date != null)
@@ -96,6 +126,25 @@ namespace WebApplication1.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteCityForecast(Guid id)
+        {
+            // Validate that the id exists in database
+            // If it doesn't - throw 400 does not exist
+
+            // If it does exist
+            // Delete the row in database
+
+            // Return Ok() with the id that we deleted
+
+            // Hint: Your code will HAVE to use _dbContext.[SOME-METHOD] on the id
+            // For both finding that the row exists and for deleting it.
+
+            // Hint2: call _dbContext.SaveChanges() to commit the db transaction
+
+            return Ok();
         }
     }
 }

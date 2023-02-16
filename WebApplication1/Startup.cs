@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WebApplication1.Models;
+using WebApplication1.Services;
 
 namespace WebApplication1
 {
@@ -32,6 +33,8 @@ namespace WebApplication1
 
             services.AddDbContext<PostgresContext>(options => options.UseNpgsql(connectionString));
             // options.UseNpgsql(Configuration.GetConnectionString("PostgresContext")));
+
+            services.AddScoped<CityForecastService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
