@@ -102,13 +102,24 @@ namespace WebApplication1.Controllers
             if (cf != null)
             {
                 // Validate that the cf.Id exists in database
+                    // Should this be handled in the CityForecastService?
                 // If its doesnt, return BadRequest();
-
+                if (cf == null 
+                    || !_cfService.ValidateCityForecastModel(cf)
+                    || _dbContext.Find<CityForecast>(cf.Id) == null)
+                    return BadRequest();
+                
                 // If it does, proceed to make changes to the object
                 // Then update row in database with said object
                 // Commit changes via _dbContext.SaveChanges();
+                var cityf = _dbContext.Find<CityForecast>(cf.Id);
+                cityf.Date = cf.Date;
+                cityf.Name = cf.Name;
+                cityf.Temperature = cf.Temperature;
+                _dbContext.SaveChanges();
 
-                var cityf = new CityForecast() { Date = DateTime.Now, Temperature = 32, Name = "stp", Id = Guid.NewGuid() };
+                /*
+                var cityf = new CityForecast() { Date = DateTime.Now, Temperature = 32, Name = "stp", Id = cf.Id };
 
                 if (cf.Date != null)
                 {
@@ -119,8 +130,9 @@ namespace WebApplication1.Controllers
                 {
                     cityf.Temperature = cf.Temperature;
                 }
+                */
 
-                return new ObjectResult(cityf);
+                return Ok(cityf);
             }
             else
             {
@@ -133,18 +145,24 @@ namespace WebApplication1.Controllers
         {
             // Validate that the id exists in database
             // If it doesn't - throw 400 does not exist
+            var cf = _dbContext.Find<CityForecast>(id);
+            if ( cf == null)
+                    return BadRequest();
 
             // If it does exist
             // Delete the row in database
+            _dbContext.Remove(cf);
+            _dbContext.SaveChanges();
 
             // Return Ok() with the id that we deleted
+                //returning Ok() with all of the data from the deleted record
 
             // Hint: Your code will HAVE to use _dbContext.[SOME-METHOD] on the id
             // For both finding that the row exists and for deleting it.
 
             // Hint2: call _dbContext.SaveChanges() to commit the db transaction
 
-            return Ok();
+            return Ok(cf);
         }
     }
 }
