@@ -10,5 +10,5 @@ jobs:
       steps:
         - uses: actions/checkout@v2
         - uses: superfly/flyctl-actions/setup-flyctl@master
-        - run: echo $DATABASE_URL
+        - run: echo ${{ secrets.DATABASE_URL }}
         - run: cd DotnetApi && flyctl deploy -a connect-api
