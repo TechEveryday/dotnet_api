@@ -10,7 +10,7 @@ on:
             - release/*
 env:
   FLY_API_TOKEN: $
-  FLY_PROJECT_PATH: connect-api
+  FLY_PROJECT_PATH: DotnetApi
 jobs:
   deploy:
       name: Deploy app
