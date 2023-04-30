@@ -1,6 +1,6 @@
-using WebApplication1.Models;
+using DotnetApi.Models;
 
-namespace WebApplication1.Services
+namespace DotnetApi.Services
 {
     public class CityForecastService : ICityForecastService
     {

@@ -2,18 +2,21 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using WebApplication1.Models;
+using DotnetApi.Models;
 
 #nullable disable
 
-namespace WebApplication1.Migrations
+namespace DotnetApi.Migrations
 {
     [DbContext(typeof(PostgresContext))]
-    partial class PostgresContextModelSnapshot : ModelSnapshot
+    [Migration("20230209005354_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace WebApplication1.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("WebApplication1.Models.CityForecast", b =>
+            modelBuilder.Entity("DotnetApi.Models.CityForecast", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +45,7 @@ namespace WebApplication1.Migrations
                     b.ToTable("CityForecast");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.WeatherForecast", b =>
+            modelBuilder.Entity("DotnetApi.Models.WeatherForecast", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

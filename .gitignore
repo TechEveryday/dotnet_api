@@ -1,5 +1,5 @@
-WebApplication1/bin
-WebApplication1/obj
+DotnetApi/bin
+DotnetApi/obj
 
 # globs
 Makefile.in
@@ -411,4 +411,4 @@ ASALocalRun/
 obj/*
 obj/Debug/
 
-*WebApplication1.assets.cache
+*DotnetApi.assets.cache

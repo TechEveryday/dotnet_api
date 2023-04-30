@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApplication1.Models;
-using WebApplication1.Services;
+using DotnetApi.Models;
+using DotnetApi.Services;
 
-namespace WebApplication1.Controllers
+namespace DotnetApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]

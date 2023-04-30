@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApplication1.Models
+namespace DotnetApi.Models
 {
   public class PostgresContext : DbContext
     {

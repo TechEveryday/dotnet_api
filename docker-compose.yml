@@ -15,7 +15,7 @@ services:
     environment:
       DB_CONNECTION_STRING: "Host=pgdb;Port=5432;Database=localdb;Username=user;Password=password"
     volumes:
-      - ./WebApplication1:/source/WebApplication1
+      - ./DotnetApi:/source/DotnetApi
     ports:
       - "5001:5000"
     networks:

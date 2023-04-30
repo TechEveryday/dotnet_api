@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>ConnectApi</RootNamespace>
     <UserSecretsId>e6d024de-2fbd-4db3-8b3f-45782092d57e</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
