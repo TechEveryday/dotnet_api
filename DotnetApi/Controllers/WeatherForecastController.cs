@@ -37,28 +37,18 @@ namespace DotnetApi.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return _dbContext
+                .Set<WeatherForecast>()
+                .ToArray();
         }
 
         [HttpGet("{name}")]
         public IEnumerable<CityForecast> GetCityForecast(string name)
         {
-            var rnd = new Random();
-            return Enumerable.Range(1, 1).Select(index => new CityForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                Temperature = rnd.Next(-20, 55),
-                Name = name,
-                Id = Guid.NewGuid()
-            })
-           .ToArray();
+            return _dbContext
+                .CityForecast
+                .Where(cf => cf.Name == name)
+                .ToArray();
         }
 
         [HttpPost]
