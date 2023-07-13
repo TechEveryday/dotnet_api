@@ -7,10 +7,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using DotnetApi.Models;
 using DotnetApi.Services;
+using System;
+using Npgsql;
 
 namespace DotnetApi
 {
-  public class Startup
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -30,8 +32,19 @@ namespace DotnetApi
 
             var connectionString = System.Environment.GetEnvironmentVariable("DATABASE_URL");
             // var connectionString = "Host=localhost;Port=5432;Database=localdb;Username=user;Password=password";
+            var databaseUri = new Uri(connectionString);
+            var userInfo = databaseUri.UserInfo.Split(':');
 
-            services.AddDbContext<PostgresContext>(options => options.UseNpgsql(connectionString));
+            var builder = new NpgsqlConnectionStringBuilder
+            {
+                Host = databaseUri.Host,
+                Port = databaseUri.Port,
+                Username = userInfo[0],
+                Password = userInfo[1],
+                Database = databaseUri.LocalPath.TrimStart('/')
+            };
+
+            services.AddDbContext<PostgresContext>(options => options.UseNpgsql(builder.ToString()));
             // options.UseNpgsql(Configuration.GetConnectionString("PostgresContext")));
 
             services.AddScoped<CityForecastService>();
@@ -42,9 +55,9 @@ namespace DotnetApi
         {
             // if (env.IsDevelopment())
             // {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DotnetApi v1"));
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DotnetApi v1"));
             // }
 
             app.UseHttpsRedirection();
