@@ -82,8 +82,6 @@ flyctl proxy 5432 -a connect-pgdb
 
 TODO NEXT SESSION
 
-- connect api locally to proxy
-- make models for our new EAV schema
 - new endpoints
 - new service
 - create repository
