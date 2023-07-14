@@ -31,20 +31,20 @@ namespace DotnetApi
             });
 
             // This is for prod
-            var databasePw = System.Environment.GetEnvironmentVariable("DATABASE_PW");
-            var builder = new NpgsqlConnectionStringBuilder
-            {
-                Host = "connect-api-db.internal",
-                Port = 5432,
-                Username = "postgres",
-                Password = databasePw,
-                Database = "postgres"
-            };
-            services.AddDbContext<PostgresContext>(options => options.UseNpgsql(builder.ToString()));
+            // var databasePw = System.Environment.GetEnvironmentVariable("DATABASE_PW");
+            // var builder = new NpgsqlConnectionStringBuilder
+            // {
+            //     Host = "connect-api-db.internal",
+            //     Port = 5432,
+            //     Username = "postgres",
+            //     Password = databasePw,
+            //     Database = "postgres"
+            // };
+            // services.AddDbContext<PostgresContext>(options => options.UseNpgsql(builder.ToString()));
 
             // This is for dev
-            // var connectionString = "Host=localhost;Port=5432;Database=postgres;Username=user;Password=password";
-            // services.AddDbContext<PostgresContext>(options => options.UseNpgsql(connectionString));
+            var connectionString = "Host=localhost;Port=5432;Database=postgres;Username=user;Password=password";
+            services.AddDbContext<PostgresContext>(options => options.UseNpgsql(connectionString));
 
             services.AddScoped<EntityService>();
         }

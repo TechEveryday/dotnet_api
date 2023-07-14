@@ -16,9 +16,9 @@ Click [here](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.
 
 Note
 
-In `Startup.cs`, if you run this locally then you'll need to use line 32. Otherwise for deploying, use line 31.
+In `Startup.cs`, if you run this locally then you'll need to use line 46-47. Otherwise for deploying, use line 34-43.
 
-For local development run the following
+For local development navigate to the project `/dotnet_api/DotnetApi` and run the following
 ```
 dotnet restore
 dotnet build
@@ -36,10 +36,6 @@ Navigate to docker desktop, and turn the `app` service off
 then in your terminal navigate back to the project `/dotnet_api/DotnetApi` and run
 ```
 dotnet-ef database update
-```
-
-and finally run
-```
 dotnet run
 ```
 
