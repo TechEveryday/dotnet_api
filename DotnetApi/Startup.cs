@@ -31,17 +31,25 @@ namespace DotnetApi
             });
 
             var connectionString = System.Environment.GetEnvironmentVariable("DATABASE_URL");
+            var databasePw = System.Environment.GetEnvironmentVariable("DATABASE_PW");
             // var connectionString = "Host=localhost;Port=5432;Database=localdb;Username=user;Password=password";
             var databaseUri = new Uri(connectionString);
             var userInfo = databaseUri.UserInfo.Split(':');
 
             var builder = new NpgsqlConnectionStringBuilder
+            // {
+            //     Host = databaseUri.Host,
+            //     Port = databaseUri.Port,
+            //     Username = userInfo[0],
+            //     Password = userInfo[1],
+            //     Database = databaseUri.LocalPath.TrimStart('/')
+            // };
             {
-                Host = databaseUri.Host,
-                Port = databaseUri.Port,
-                Username = userInfo[0],
-                Password = userInfo[1],
-                Database = databaseUri.LocalPath.TrimStart('/')
+                Host = "connect-api-db.flycast",
+                Port = 5432,
+                Username = "postgres",
+                Password = databasePw,
+                Database = "postgres"
             };
 
             services.AddDbContext<PostgresContext>(options => options.UseNpgsql(builder.ToString()));
