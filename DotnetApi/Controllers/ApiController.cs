@@ -11,7 +11,6 @@ using DotnetApi.Services;
 namespace DotnetApi.Controllers
 {
     [ApiController]
-    [Route("v1")]
     public class ApiController : ControllerBase
     {
         private readonly ILogger<ApiController> _logger;
@@ -30,16 +29,7 @@ namespace DotnetApi.Controllers
         }
 
         [HttpGet]
-        [Route("/entity")]
-        public IEnumerable<Entity> GetAllEntities()
-        {
-            return _dbContext
-                .Set<Entity>()
-                .ToArray();
-        }
-
-        [HttpGet("{id}")]
-        [Route("/entity/{id}}")]
+        [Route("entity/{id}")]
         public IEnumerable<Entity> GetEntityById(Guid id)
         {
             return _dbContext
@@ -49,7 +39,7 @@ namespace DotnetApi.Controllers
         }
 
         [HttpPost]
-        [Route("/entity")]
+        [Route("entity")]
         public IActionResult CreateEntity([FromBody] Entity entity)
         {
             try
@@ -79,7 +69,7 @@ namespace DotnetApi.Controllers
         }
 
         [HttpPatch]
-        [Route("/entity")]
+        [Route("entity")]
         public IActionResult JsonPatchWithModelState([FromBody] Entity entity)
         {
             if (entity == null
@@ -104,7 +94,7 @@ namespace DotnetApi.Controllers
         }
 
         [HttpDelete]
-        [Route("/entity/{id}")]
+        [Route("entity/{id}")]
         public IActionResult DeleteEntity(Guid id)
         {
             var entity = _dbContext.Find<Entity>(id);
