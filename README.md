@@ -18,17 +18,53 @@ Note
 
 In `Startup.cs`, if you run this locally then you'll need to use line 32. Otherwise for deploying, use line 31.
 
+For local development run the following
+```
+dotnet restore
+dotnet build
+dotnet tool restore
+```
 
-Run `./scripts/dotnet.sh`
+After that, navigate to the root of the solution. `/dotnet_api` and run
+```
+./scripts/docker.sh
+```
+that will spin up the app and database in the docker container
+
+Navigate to docker desktop, and turn the `app` service off
+
+then in your terminal navigate back to the project `/dotnet_api/DotnetApi` and run
+```
+dotnet-ef database update
+```
+
+and finally run
+```
+dotnet run
+```
+
+<!-- Run `./scripts/dotnet.sh`
 
 This script will do the following
 
 - build the postgres image
 - build our application
 - update our database
-- run our application
+- run our application -->
 
 Then navigate you should be able to navigate [here](https://localhost:5001/swagger/index.html) or [here](http://localhost:5000/swagger/index.html)
+
+## Updating Schema
+
+If you are in need of updating the schema for the database, then make sure after you make your changes to the model that
+you navigate to the project directory so `/dotnet_api/DotnetApi` and run the following commands
+
+```
+dotnet-ef migrations add NameOfChangesHere
+dotnet-ef database update
+```
+
+You should see new files added to `/DotnetApi/Migrations`
 
 ### Having Issues?
 
@@ -77,7 +113,7 @@ After typing out your query, highlight your query, then press "CTRL + Enter" to 
 Cd to root directory and run
 
 ```
-flyctl proxy 5432 -a connect-pgdb
+flyctl proxy 5432 -a connect-api-db
 ```
 
 TODO NEXT SESSION

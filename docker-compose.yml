@@ -7,13 +7,11 @@ networks:
 services:
   app:
     container_name: 'app'
-    depends_on:
-      - "pgdb"
     build:
       context: .
       dockerfile: .docker/app/Dockerfile
     environment:
-      DB_CONNECTION_STRING: "Host=pgdb;Port=5432;Database=localdb;Username=user;Password=password"
+      DB_CONNECTION_STRING: "Host=localhost;Port=5432;Database=postgres;Username=user;Password=password"
     volumes:
       - ./DotnetApi:/source/DotnetApi
     ports:
@@ -29,6 +27,6 @@ services:
     environment:
       POSTGRES_PASSWORD: "password"
       POSTGRES_USER: "user"
-      POSTGRES_DB: "localdb"
+      POSTGRES_DB: "postgres"
     networks:
       - dockerapi-dev
