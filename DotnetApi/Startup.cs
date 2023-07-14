@@ -30,20 +30,9 @@ namespace DotnetApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DotnetApi", Version = "v1" });
             });
 
-            var connectionString = System.Environment.GetEnvironmentVariable("DATABASE_URL");
+            // This is for prod
             var databasePw = System.Environment.GetEnvironmentVariable("DATABASE_PW");
-            // var connectionString = "Host=localhost;Port=5432;Database=localdb;Username=user;Password=password";
-            var databaseUri = new Uri(connectionString);
-            var userInfo = databaseUri.UserInfo.Split(':');
-
             var builder = new NpgsqlConnectionStringBuilder
-            // {
-            //     Host = databaseUri.Host,
-            //     Port = databaseUri.Port,
-            //     Username = userInfo[0],
-            //     Password = userInfo[1],
-            //     Database = databaseUri.LocalPath.TrimStart('/')
-            // };
             {
                 Host = "connect-api-db.internal",
                 Port = 5432,
@@ -51,11 +40,13 @@ namespace DotnetApi
                 Password = databasePw,
                 Database = "postgres"
             };
-
             services.AddDbContext<PostgresContext>(options => options.UseNpgsql(builder.ToString()));
-            // options.UseNpgsql(Configuration.GetConnectionString("PostgresContext")));
 
-            services.AddScoped<CityForecastService>();
+            // This is for dev
+            // var connectionString = "Host=localhost;Port=5432;Database=postgres;Username=user;Password=password";
+            // services.AddDbContext<PostgresContext>(options => options.UseNpgsql(connectionString));
+
+            services.AddScoped<EntityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

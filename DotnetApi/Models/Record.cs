@@ -9,5 +9,7 @@ namespace DotnetApi.Models
         public Guid AttributeId { get; set; }
 
         public Guid EntityId { get; set; }
+
+        public int Id { get; set; }
     }
 }
