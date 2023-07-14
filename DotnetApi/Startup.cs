@@ -45,7 +45,7 @@ namespace DotnetApi
             //     Database = databaseUri.LocalPath.TrimStart('/')
             // };
             {
-                Host = "connect-api-db.flycast",
+                Host = "connect-api-db.internal",
                 Port = 5432,
                 Username = "postgres",
                 Password = databasePw,
