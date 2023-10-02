@@ -28,6 +28,17 @@ namespace DotnetApi.Controllers
             _entityService = entityService;
         }
 
+
+        [HttpGet]
+        [Route("entity/{id}")]
+        public IEnumerable<Entity> GetEntities([FromBody] int appId)
+        {
+            return _dbContext
+                .Entity
+                .Where(cf => cf.AppId == appId)
+                .ToArray();
+        }
+
         [HttpGet]
         [Route("entity/{id}")]
         public IEnumerable<Entity> GetEntityById(Guid id)

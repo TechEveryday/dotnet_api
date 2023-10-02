@@ -1,6 +1,6 @@
 using DotnetApi.Models;
 
-namespace DotnetApi.Services
+namespace DotnetApi.Interfaces
 {
     public interface IEntityService
     {

@@ -1,4 +1,5 @@
 using DotnetApi.Models;
+using DotnetApi.Interfaces;
 
 namespace DotnetApi.Services
 {
