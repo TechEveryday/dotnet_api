@@ -7,58 +7,59 @@ using System.Threading.Tasks;
 
 namespace DotnetApi.Repositories
 {
-  public class EntityRepository : IEntityRepository
+  public class RecordRepository : IRecordRepository
   {
     private readonly PostgresContext _dbContext;
 
-    public EntityRepository(PostgresContext dbContext)
+    public RecordRepository(PostgresContext dbContext)
     {
       _dbContext = dbContext;
     }
 
-    public IEnumerable<Entity> GetById(Guid id)
+    public IEnumerable<Record> GetById(int id)
     {
       return _dbContext
-        .Entity
+        .Record
         .Where(cf => cf.Id == id)
         .ToArray();
     }
 
-    public Guid Create(Entity entity)
+    public int Create(Record record)
     {
-      _dbContext.Add<Entity>(entity);
+      _dbContext.Add<Record>(record);
       _dbContext.SaveChanges();
 
-      return entity.Id;
+      return record.Id;
     }
 
-    public IEnumerable<Entity> Get(int appId)
+    public IEnumerable<Record> Get(Guid entityId)
     {
       return _dbContext
-        .Entity
-        .Where(cf => cf.AppId == appId)
+        .Record
+        .Where(cf => cf.EntityId == entityId)
         .ToArray();
     }
 
-    public Guid Update(Entity entity)
+    public int Update(Record record)
     {
       _dbContext
-          .Entity
-          .Update(entity);
+          .Record
+          .Update(record);
+
       _dbContext.SaveChanges();
 
-      return entity.Id;
+      return record.Id;
     }
 
-    public Guid Delete(Entity entity)
+    public int Delete(Record record)
     {
       _dbContext
-        .Entity
-        .Remove(entity);
+        .Record
+        .Remove(record);
 
       _dbContext.SaveChanges();
 
-      return entity.Id;
+      return record.Id;
     }
   }
 }

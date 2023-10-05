@@ -10,6 +10,6 @@ namespace DotnetApi.Interfaces
     IEnumerable<Entity> GetById(Guid id);
     Guid Create(Entity entity);
     Guid Update(Entity entity);
-    Guid Delete(Guid id);
+    Guid Delete(Entity entity);
   }
 }
