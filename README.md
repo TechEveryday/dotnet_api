@@ -19,6 +19,7 @@ Note
 In `Startup.cs`, if you run this locally then you'll need to use line 46-47. Otherwise for deploying, use line 34-43.
 
 For local development navigate to the project `/dotnet_api/DotnetApi` and run the following
+
 ```
 dotnet restore
 dotnet build
@@ -26,14 +27,17 @@ dotnet tool restore
 ```
 
 After that, navigate to the root of the solution. `/dotnet_api` and run
+
 ```
 ./scripts/docker.sh
 ```
+
 that will spin up the app and database in the docker container
 
 Navigate to docker desktop, and turn the `app` service off
 
 then in your terminal navigate back to the project `/dotnet_api/DotnetApi` and run
+
 ```
 dotnet-ef database update
 dotnet run
@@ -111,9 +115,3 @@ Cd to root directory and run
 ```
 flyctl proxy 5432 -a connect-api-db
 ```
-
-TODO NEXT SESSION
-
-- new endpoints
-- new service
-- create repository
