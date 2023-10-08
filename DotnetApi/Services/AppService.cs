@@ -1,15 +1,15 @@
 using DotnetApi.Models;
-using DotnetApi.Interfaces;
 using System;
 using System.Linq;
+using DotnetApi.Repositories;
 
 namespace DotnetApi.Services
 {
   public class AppService
   {
-    private readonly IAppRepository _appRepository;
+    private readonly AppRepository _appRepository;
 
-    public AppService(IAppRepository appRepository)
+    public AppService(AppRepository appRepository)
     {
       _appRepository = appRepository;
     }

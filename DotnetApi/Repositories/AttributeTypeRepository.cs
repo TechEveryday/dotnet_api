@@ -1,13 +1,10 @@
 using DotnetApi.Models;
-using DotnetApi.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace DotnetApi.Repositories
 {
-  public class AttributeTypeRepository : IAttributeTypeRepository
+  public class AttributeTypeRepository
   {
     private readonly PostgresContext _dbContext;
 

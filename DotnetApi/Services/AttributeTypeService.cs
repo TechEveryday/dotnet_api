@@ -1,5 +1,5 @@
 using DotnetApi.Models;
-using DotnetApi.Interfaces;
+using DotnetApi.Repositories;
 using System;
 using System.Linq;
 
@@ -7,9 +7,9 @@ namespace DotnetApi.Services
 {
   public class AttributeTypeService
   {
-    private readonly IAttributeTypeRepository _attributeTypeRepository;
+    private readonly AttributeTypeRepository _attributeTypeRepository;
 
-    public AttributeTypeService(IAttributeTypeRepository attributeTypeRepository)
+    public AttributeTypeService(AttributeTypeRepository attributeTypeRepository)
     {
       _attributeTypeRepository = attributeTypeRepository;
     }

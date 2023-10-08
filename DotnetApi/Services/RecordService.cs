@@ -1,5 +1,5 @@
 using DotnetApi.Models;
-using DotnetApi.Interfaces;
+using DotnetApi.Repositories;
 using System;
 using System.Linq;
 
@@ -7,9 +7,9 @@ namespace DotnetApi.Services
 {
   public class RecordService
   {
-    private readonly IRecordRepository _recordRepository;
+    private readonly RecordRepository _recordRepository;
 
-    public RecordService(IRecordRepository recordRepository)
+    public RecordService(RecordRepository recordRepository)
     {
       _recordRepository = recordRepository;
     }

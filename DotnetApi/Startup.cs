@@ -3,14 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using DotnetApi.Models;
 using DotnetApi.Services;
-using System;
 using Npgsql;
 using DotnetApi.Repositories;
-using DotnetApi.Interfaces;
 
 namespace DotnetApi
 {
@@ -55,12 +52,12 @@ namespace DotnetApi
             services.AddScoped<EntityTypeService>();
             services.AddScoped<RecordService>();
 
-            services.AddScoped<IAppRepository, AppRepository>();
-            services.AddScoped<IAttributeRepository, AttributeRepository>();
-            services.AddScoped<IAttributeTypeRepository, AttributeTypeRepository>();
-            services.AddScoped<IEntityRepository, EntityRepository>();
-            services.AddScoped<IEntityTypeRepository, EntityTypeRepository>();
-            services.AddScoped<IRecordRepository, RecordRepository>();
+            services.AddScoped<AppRepository>();
+            services.AddScoped<AttributeRepository>();
+            services.AddScoped<AttributeTypeRepository>();
+            services.AddScoped<EntityRepository>();
+            services.AddScoped<EntityTypeRepository>();
+            services.AddScoped<RecordRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

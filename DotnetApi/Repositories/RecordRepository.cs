@@ -1,13 +1,11 @@
 using DotnetApi.Models;
-using DotnetApi.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace DotnetApi.Repositories
 {
-  public class RecordRepository : IRecordRepository
+  public class RecordRepository
   {
     private readonly PostgresContext _dbContext;
 

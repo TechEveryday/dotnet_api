@@ -1,5 +1,5 @@
 using DotnetApi.Models;
-using DotnetApi.Interfaces;
+using DotnetApi.Repositories;
 using System;
 using System.Linq;
 
@@ -7,9 +7,9 @@ namespace DotnetApi.Services
 {
   public class EntityTypeService
   {
-    private readonly IEntityTypeRepository _entityTypeRepository;
+    private readonly EntityTypeRepository _entityTypeRepository;
 
-    public EntityTypeService(IEntityTypeRepository entityTypeRepository)
+    public EntityTypeService(EntityTypeRepository entityTypeRepository)
     {
       _entityTypeRepository = entityTypeRepository;
     }
