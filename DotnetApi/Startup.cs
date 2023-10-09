@@ -3,12 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using DotnetApi.Models;
 using DotnetApi.Services;
-using System;
 using Npgsql;
+using DotnetApi.Repositories;
 
 namespace DotnetApi
 {
@@ -46,7 +45,19 @@ namespace DotnetApi
             // var connectionString = "Host=localhost;Port=5432;Database=postgres;Username=user;Password=password";
             // services.AddDbContext<PostgresContext>(options => options.UseNpgsql(connectionString));
 
+            services.AddScoped<AppService>();
+            services.AddScoped<AttributeService>();
+            services.AddScoped<AttributeTypeService>();
             services.AddScoped<EntityService>();
+            services.AddScoped<EntityTypeService>();
+            services.AddScoped<RecordService>();
+
+            services.AddScoped<AppRepository>();
+            services.AddScoped<AttributeRepository>();
+            services.AddScoped<AttributeTypeRepository>();
+            services.AddScoped<EntityRepository>();
+            services.AddScoped<EntityTypeRepository>();
+            services.AddScoped<RecordRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
