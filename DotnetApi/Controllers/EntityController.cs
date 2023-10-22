@@ -60,35 +60,35 @@ namespace DotnetApi.Controllers
       }
     }
 
-    [HttpPatch]
-    [Route("entity/update")]
-    public IActionResult PatchEntity([FromBody] Entity entity)
-    {
-      try
-      {
-        _entityService.update(entity);
-        return Ok(entity);
-      }
-      catch (Exception e)
-      {
-        return StatusCode(StatusCodes.Status500InternalServerError,
-            $"Error updating entity: {e.Message}");
-      }
-    }
+    // [HttpPatch]
+    // [Route("entity/update")]
+    // public IActionResult PatchEntity([FromBody] Entity entity)
+    // {
+    //   try
+    //   {
+    //     _entityService.update(entity);
+    //     return Ok(entity);
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return StatusCode(StatusCodes.Status500InternalServerError,
+    //         $"Error updating entity: {e.Message}");
+    //   }
+    // }
 
-    [HttpDelete]
-    [Route("entity/delete/{id}")]
-    public IActionResult DeleteEntity(Guid id)
-    {
-      try
-      {
-        _entityService.delete(id);
-        return Ok();
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
+    // [HttpDelete]
+    // [Route("entity/delete/{id}")]
+    // public IActionResult DeleteEntity(Guid id)
+    // {
+    //   try
+    //   {
+    //     _entityService.delete(id);
+    //     return Ok();
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
   }
 }

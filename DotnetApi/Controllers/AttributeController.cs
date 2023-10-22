@@ -59,35 +59,35 @@ namespace DotnetApi.Controllers
       }
     }
 
-    [HttpPatch]
-    [Route("attribute/update")]
-    public IActionResult PatchAttribute([FromBody] Models.Attribute attribute)
-    {
-      try
-      {
-        _attributeService.update(attribute);
-        return Ok(attribute);
-      }
-      catch (Exception e)
-      {
-        return StatusCode(StatusCodes.Status500InternalServerError,
-            $"Error updating attribute: {e.Message}");
-      }
-    }
+    // [HttpPatch]
+    // [Route("attribute/update")]
+    // public IActionResult PatchAttribute([FromBody] Models.Attribute attribute)
+    // {
+    //   try
+    //   {
+    //     _attributeService.update(attribute);
+    //     return Ok(attribute);
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return StatusCode(StatusCodes.Status500InternalServerError,
+    //         $"Error updating attribute: {e.Message}");
+    //   }
+    // }
 
-    [HttpDelete]
-    [Route("attribute/delete/{id}")]
-    public IActionResult DeleteAttribute(Guid id)
-    {
-      try
-      {
-        _attributeService.delete(id);
-        return Ok();
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
+    // [HttpDelete]
+    // [Route("attribute/delete/{id}")]
+    // public IActionResult DeleteAttribute(Guid id)
+    // {
+    //   try
+    //   {
+    //     _attributeService.delete(id);
+    //     return Ok();
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
   }
 }

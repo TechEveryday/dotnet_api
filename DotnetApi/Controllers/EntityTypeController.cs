@@ -60,21 +60,21 @@ namespace DotnetApi.Controllers
       }
     }
 
-    [HttpPatch]
-    [Route("entityType/update")]
-    public IActionResult PatchEntityType([FromBody] EntityType entityType)
-    {
-      try
-      {
-        _entityTypeService.update(entityType);
-        return Ok(entityType);
-      }
-      catch (Exception e)
-      {
-        return StatusCode(StatusCodes.Status500InternalServerError,
-            $"Error updating entityType: {e.Message}");
-      }
-    }
+    // [HttpPatch]
+    // [Route("entityType/update")]
+    // public IActionResult PatchEntityType([FromBody] EntityType entityType)
+    // {
+    //   try
+    //   {
+    //     _entityTypeService.update(entityType);
+    //     return Ok(entityType);
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return StatusCode(StatusCodes.Status500InternalServerError,
+    //         $"Error updating entityType: {e.Message}");
+    //   }
+    // }
 
     // [HttpDelete]
     // [Route("entityType/delete/{id}")]

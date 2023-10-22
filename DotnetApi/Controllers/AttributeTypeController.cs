@@ -60,21 +60,21 @@ namespace DotnetApi.Controllers
       }
     }
 
-    [HttpPatch]
-    [Route("attributeType/update")]
-    public IActionResult PatchAttributeType([FromBody] AttributeType attributeType)
-    {
-      try
-      {
-        _attributeTypeService.update(attributeType);
-        return Ok(attributeType);
-      }
-      catch (Exception e)
-      {
-        return StatusCode(StatusCodes.Status500InternalServerError,
-            $"Error updating attribute {e.Message}");
-      }
-    }
+    // [HttpPatch]
+    // [Route("attributeType/update")]
+    // public IActionResult PatchAttributeType([FromBody] AttributeType attributeType)
+    // {
+    //   try
+    //   {
+    //     _attributeTypeService.update(attributeType);
+    //     return Ok(attributeType);
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return StatusCode(StatusCodes.Status500InternalServerError,
+    //         $"Error updating attribute {e.Message}");
+    //   }
+    // }
 
     // [HttpDelete]
     // [Route("attributeType/delete/{id}")]
