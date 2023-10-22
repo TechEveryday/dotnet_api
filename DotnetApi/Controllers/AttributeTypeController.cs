@@ -76,19 +76,19 @@ namespace DotnetApi.Controllers
       }
     }
 
-    [HttpDelete]
-    [Route("attributeType/delete/{id}")]
-    public IActionResult DeleteAttributeType(int id)
-    {
-      try
-      {
-        _attributeTypeService.delete(id);
-        return Ok();
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
+    // [HttpDelete]
+    // [Route("attributeType/delete/{id}")]
+    // public IActionResult DeleteAttributeType(int id)
+    // {
+    //   try
+    //   {
+    //     _attributeTypeService.delete(id);
+    //     return Ok();
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
   }
 }

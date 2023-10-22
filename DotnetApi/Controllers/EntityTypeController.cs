@@ -76,19 +76,19 @@ namespace DotnetApi.Controllers
       }
     }
 
-    [HttpDelete]
-    [Route("entityType/delete/{id}")]
-    public IActionResult DeleteEntityType(int id)
-    {
-      try
-      {
-        _entityTypeService.delete(id);
-        return Ok();
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
+    // [HttpDelete]
+    // [Route("entityType/delete/{id}")]
+    // public IActionResult DeleteEntityType(int id)
+    // {
+    //   try
+    //   {
+    //     _entityTypeService.delete(id);
+    //     return Ok();
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
   }
 }

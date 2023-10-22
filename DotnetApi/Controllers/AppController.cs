@@ -59,35 +59,35 @@ namespace DotnetApi.Controllers
       }
     }
 
-    [HttpPatch]
-    [Route("app/update")]
-    public IActionResult PatchApp([FromBody] App app)
-    {
-      try
-      {
-        _appService.update(app);
-        return Ok(app);
-      }
-      catch (Exception e)
-      {
-        return StatusCode(StatusCodes.Status500InternalServerError,
-            $"Error updating app: {e.Message}");
-      }
-    }
+    // [HttpPatch]
+    // [Route("app/update")]
+    // public IActionResult PatchApp([FromBody] App app)
+    // {
+    //   try
+    //   {
+    //     _appService.update(app);
+    //     return Ok(app);
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return StatusCode(StatusCodes.Status500InternalServerError,
+    //         $"Error updating app: {e.Message}");
+    //   }
+    // }
 
-    [HttpDelete]
-    [Route("app/delete/{id}")]
-    public IActionResult DeleteApp(int id)
-    {
-      try
-      {
-        _appService.delete(id);
-        return Ok();
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
+    // [HttpDelete]
+    // [Route("app/delete/{id}")]
+    // public IActionResult DeleteApp(int id)
+    // {
+    //   try
+    //   {
+    //     _appService.delete(id);
+    //     return Ok();
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
   }
 }
