@@ -50,10 +50,10 @@ namespace DotnetApi.Services
       return (Record[])_recordRepository.Get(entityId);
     }
 
-    // public Record[] getById(int id)
-    // {
-    //   return (Record[])_recordRepository.GetById(id);
-    // }
+    public Record[] getById(int id)
+    {
+      return (Record[])_recordRepository.GetById(id);
+    }
 
     // public Record[] getByEntityAndAttribute(Guid entityId, Guid attributeId)
     // {

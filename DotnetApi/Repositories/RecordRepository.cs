@@ -14,13 +14,13 @@ namespace DotnetApi.Repositories
       _dbContext = dbContext;
     }
 
-    // public IEnumerable<Record> GetById(int id)
-    // {
-    //   return _dbContext
-    //     .Record
-    //     .Where(cf => cf.Id == id)
-    //     .ToArray();
-    // }
+    public IEnumerable<Record> GetById(int id)
+    {
+      return _dbContext
+        .Record
+        .Where(cf => cf.Id == id)
+        .ToArray();
+    }
 
     public IEnumerable<Record> GetByEntityAndAttribute(Guid entityId, Guid attributeId)
     {

@@ -6,6 +6,9 @@ namespace DotnetApi.Models
     [Table("record")]
     public class Record
     {
+        [Column("id")]
+        public int Id { get; set; }
+
         [Column("value")]
         public string Value { get; set; }
 
