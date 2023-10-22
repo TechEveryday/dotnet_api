@@ -52,10 +52,10 @@ namespace DotnetApi.Controllers
         _appService.create(app);
         return Ok(app);
       }
-      catch (Exception)
+      catch (Exception e)
       {
         return StatusCode(StatusCodes.Status500InternalServerError,
-            "Error creating new app");
+            $"Error creating new app: {e.Message}");
       }
     }
 
@@ -68,10 +68,10 @@ namespace DotnetApi.Controllers
         _appService.update(app);
         return Ok(app);
       }
-      catch
+      catch (Exception e)
       {
         return StatusCode(StatusCodes.Status500InternalServerError,
-            "Error updating app");
+            $"Error updating app: {e.Message}");
       }
     }
 

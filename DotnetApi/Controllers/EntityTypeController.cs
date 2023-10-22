@@ -53,10 +53,10 @@ namespace DotnetApi.Controllers
         _entityTypeService.create(entityType);
         return Ok(entityType);
       }
-      catch (Exception)
+      catch (Exception e)
       {
         return StatusCode(StatusCodes.Status500InternalServerError,
-            "Error creating new entityType");
+            $"Error creating new entityType: {e.Message}");
       }
     }
 
@@ -69,10 +69,10 @@ namespace DotnetApi.Controllers
         _entityTypeService.update(entityType);
         return Ok(entityType);
       }
-      catch
+      catch (Exception e)
       {
         return StatusCode(StatusCodes.Status500InternalServerError,
-            "Error updating entityType");
+            $"Error updating entityType: {e.Message}");
       }
     }
 

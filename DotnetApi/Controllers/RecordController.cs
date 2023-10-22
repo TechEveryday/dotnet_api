@@ -53,10 +53,10 @@ namespace DotnetApi.Controllers
         _recordService.create(record);
         return Ok(record);
       }
-      catch (Exception)
+      catch (Exception e)
       {
         return StatusCode(StatusCodes.Status500InternalServerError,
-            "Error creating new record");
+            $"Error creating new record: {e.Message}");
       }
     }
 
@@ -69,10 +69,10 @@ namespace DotnetApi.Controllers
         _recordService.update(record);
         return Ok(record);
       }
-      catch
+      catch (Exception e)
       {
         return StatusCode(StatusCodes.Status500InternalServerError,
-            "Error updating record");
+            $"Error updating record: {e.Message}");
       }
     }
 

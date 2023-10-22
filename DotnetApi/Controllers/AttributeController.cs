@@ -52,10 +52,10 @@ namespace DotnetApi.Controllers
         _attributeService.create(attribute);
         return Ok(attribute);
       }
-      catch (Exception)
+      catch (Exception e)
       {
         return StatusCode(StatusCodes.Status500InternalServerError,
-            "Error creating new attribute");
+            $"Error creating new attribute: {e.Message}");
       }
     }
 
@@ -68,10 +68,10 @@ namespace DotnetApi.Controllers
         _attributeService.update(attribute);
         return Ok(attribute);
       }
-      catch
+      catch (Exception e)
       {
         return StatusCode(StatusCodes.Status500InternalServerError,
-            "Error updating attribute");
+            $"Error updating attribute: {e.Message}");
       }
     }
 
