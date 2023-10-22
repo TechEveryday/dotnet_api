@@ -94,7 +94,7 @@ Click Next
 
 Host: localhost
 Port: 5432
-Database: localdb
+Database: postgres
 Username: user
 Password: password
 

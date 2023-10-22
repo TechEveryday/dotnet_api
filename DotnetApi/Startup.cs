@@ -42,7 +42,7 @@ namespace DotnetApi
             services.AddDbContext<PostgresContext>(options => options.UseNpgsql(builder.ToString()));
 
             // This is for dev
-            // var connectionString = "Host=localhost;Port=5432;Database=postgres;Username=user;Password=password";
+            // var connectionString = "Host=localhost;Port=5432;Database=postgres;Username=user;Password=password;SearchPath=public;";
             // services.AddDbContext<PostgresContext>(options => options.UseNpgsql(connectionString));
 
             services.AddScoped<AppService>();
