@@ -62,7 +62,7 @@ namespace DotnetApi.Services
     public bool ValidateModel(EntityType entityTypeToValidate)
     {
       return entityTypeToValidate != null
-          && entityTypeToValidate.Id != 0
+          // && entityTypeToValidate.Id != 0
           && entityTypeToValidate.Name != null;
     }
   }

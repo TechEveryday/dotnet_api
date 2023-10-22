@@ -62,7 +62,7 @@ namespace DotnetApi.Services
     public bool ValidateModel(AttributeType attributeTypeToValidate)
     {
       return attributeTypeToValidate != null
-          && attributeTypeToValidate.Id != 0
+          // && attributeTypeToValidate.Id != 0
           && attributeTypeToValidate.Name != null;
     }
   }

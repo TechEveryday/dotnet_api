@@ -62,7 +62,7 @@ namespace DotnetApi.Services
     public bool ValidateModel(App appToValidate)
     {
       return appToValidate != null
-          && appToValidate.Id != 0
+          // && appToValidate.Id != 0
           && appToValidate.Name != null;
     }
   }
