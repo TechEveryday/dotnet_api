@@ -14,8 +14,5 @@ namespace DotnetApi.Models
 
         [Column("entity_id")]
         public Guid EntityId { get; set; }
-
-        [Column("id")]
-        public int Id { get; set; }
     }
 }

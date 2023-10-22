@@ -14,20 +14,28 @@ namespace DotnetApi.Repositories
       _dbContext = dbContext;
     }
 
-    public IEnumerable<Record> GetById(int id)
+    // public IEnumerable<Record> GetById(int id)
+    // {
+    //   return _dbContext
+    //     .Record
+    //     .Where(cf => cf.Id == id)
+    //     .ToArray();
+    // }
+
+    public IEnumerable<Record> GetByEntityAndAttribute(Guid entityId, Guid attributeId)
     {
       return _dbContext
         .Record
-        .Where(cf => cf.Id == id)
+        .Where(cf => cf.EntityId == entityId && cf.AttributeId == attributeId)
         .ToArray();
     }
 
-    public int Create(Record record)
+    public Record Create(Record record)
     {
       _dbContext.Add<Record>(record);
       _dbContext.SaveChanges();
 
-      return record.Id;
+      return record;
     }
 
     public IEnumerable<Record> Get(Guid entityId)
@@ -38,7 +46,7 @@ namespace DotnetApi.Repositories
         .ToArray();
     }
 
-    public int Update(Record record)
+    public Record Update(Record record)
     {
       _dbContext
           .Record
@@ -46,18 +54,18 @@ namespace DotnetApi.Repositories
 
       _dbContext.SaveChanges();
 
-      return record.Id;
+      return record;
     }
 
-    public int Delete(Record record)
-    {
-      _dbContext
-        .Record
-        .Remove(record);
+    // public int Delete(Record record)
+    // {
+    //   _dbContext
+    //     .Record
+    //     .Remove(record);
 
-      _dbContext.SaveChanges();
+    //   _dbContext.SaveChanges();
 
-      return record.Id;
-    }
+    //   return record.Id;
+    // }
   }
 }

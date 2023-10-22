@@ -30,19 +30,19 @@ namespace DotnetApi.Controllers
 
     }
 
-    [HttpGet]
-    [Route("record/{id}")]
-    public IActionResult GetRecordById(int id)
-    {
-      try
-      {
-        return Ok(_recordService.getById(id));
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
+    // [HttpGet]
+    // [Route("record/{id}")]
+    // public IActionResult GetRecordByEntityIdAndAttributeId(Guid entityId, Guid attributeId)
+    // {
+    //   try
+    //   {
+    //     return Ok(_recordService.getByEntityAndAttribute(entityId, attributeId));
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
 
     [HttpPost]
     [Route("record")]
@@ -76,19 +76,19 @@ namespace DotnetApi.Controllers
       }
     }
 
-    [HttpDelete]
-    [Route("record/{id}")]
-    public IActionResult DeleteRecord(int id)
-    {
-      try
-      {
-        _recordService.delete(id);
-        return Ok();
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
+    // [HttpDelete]
+    // [Route("record/{id}")]
+    // public IActionResult DeleteRecord(int id)
+    // {
+    //   try
+    //   {
+    //     _recordService.delete(id);
+    //     return Ok();
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
   }
 }
