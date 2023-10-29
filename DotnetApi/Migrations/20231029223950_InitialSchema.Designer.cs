@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DotnetApi.Migrations
 {
     [DbContext(typeof(PostgresContext))]
-    [Migration("20231022174334_updatelocaldb")]
-    partial class updatelocaldb
+    [Migration("20231029223950_InitialSchema")]
+    partial class InitialSchema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,12 +121,10 @@ namespace DotnetApi.Migrations
 
             modelBuilder.Entity("DotnetApi.Models.Record", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<Guid>("AttributeId")
                         .HasColumnType("uuid")

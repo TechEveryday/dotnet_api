@@ -23,26 +23,26 @@ namespace DotnetApi.Controllers
     }
 
     [HttpGet]
-    [Route("record/{entityId}")]
+    [Route("record/getByEntityId/{entityId}")]
     public IActionResult GetRecords(Guid entityId)
     {
       return Ok(_recordService.get(entityId));
 
     }
 
-    // [HttpGet]
-    // [Route("record/{id}")]
-    // public IActionResult GetRecordById(int id)
-    // {
-    //   try
-    //   {
-    //     return Ok(_recordService.getById(id));
-    //   }
-    //   catch (Exception e)
-    //   {
-    //     return BadRequest(e.Message);
-    //   }
-    // }
+    [HttpGet]
+    [Route("record/{id}")]
+    public IActionResult GetRecordById(Guid id)
+    {
+      try
+      {
+        return Ok(_recordService.getById(id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
 
     [HttpPost]
     [Route("record")]

@@ -14,7 +14,7 @@ namespace DotnetApi.Repositories
       _dbContext = dbContext;
     }
 
-    public IEnumerable<Record> GetById(int id)
+    public IEnumerable<Record> GetById(Guid id)
     {
       return _dbContext
         .Record

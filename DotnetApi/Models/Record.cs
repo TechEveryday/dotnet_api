@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DotnetApi.Models
@@ -6,9 +7,6 @@ namespace DotnetApi.Models
     [Table("record")]
     public class Record
     {
-        [Column("id")]
-        public int Id { get; set; }
-
         [Column("value")]
         public string Value { get; set; }
 
@@ -17,5 +15,8 @@ namespace DotnetApi.Models
 
         [Column("entity_id")]
         public Guid EntityId { get; set; }
+
+        [Column("id")]
+        public Guid Id { get; set; }
     }
 }
