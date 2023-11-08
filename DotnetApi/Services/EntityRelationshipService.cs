@@ -45,6 +45,16 @@ namespace DotnetApi.Services
       return _entityRelationshipRepository.Delete(existingEntityRelationship);
     }
 
+    public EntityRelationship[] getCouriersForManager(Guid entityId)
+    {
+      return (EntityRelationship[])_entityRelationshipRepository.GetCouriersForManager(entityId);
+    }
+
+    public EntityRelationship[] getDeliveriesForCourier(Guid entityId)
+    {
+      return (EntityRelationship[])_entityRelationshipRepository.GetDeliveriesForCourier(entityId);
+    }
+
     public EntityRelationship[] get(Guid entityId)
     {
       return (EntityRelationship[])_entityRelationshipRepository.Get(entityId);

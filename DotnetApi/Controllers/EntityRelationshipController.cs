@@ -30,6 +30,22 @@ namespace DotnetApi.Controllers
 
     }
 
+    [HttpGet]
+    [Route("entityRelationship/getCouriersForManager/{entityId}")]
+    public IActionResult GetCouriersForManager(Guid entityId)
+    {
+      return Ok(_entityRelationshipService.getCouriersForManager(entityId));
+
+    }
+
+    [HttpGet]
+    [Route("entityRelationship/getDeliveriesForCourier/{entityId}")]
+    public IActionResult GetDeliveriesForCourier(Guid entityId)
+    {
+      return Ok(_entityRelationshipService.getDeliveriesForCourier(entityId));
+
+    }
+
     [HttpPost]
     [Route("entityRelationship/create")]
     public IActionResult CreateEntityRelationship([FromBody] EntityRelationship entityRelationship)

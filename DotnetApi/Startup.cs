@@ -51,6 +51,7 @@ namespace DotnetApi
             services.AddScoped<EntityService>();
             services.AddScoped<EntityTypeService>();
             services.AddScoped<RecordService>();
+            services.AddScoped<EntityRelationshipService>();
 
             services.AddScoped<AppRepository>();
             services.AddScoped<AttributeRepository>();
@@ -58,6 +59,7 @@ namespace DotnetApi
             services.AddScoped<EntityRepository>();
             services.AddScoped<EntityTypeRepository>();
             services.AddScoped<RecordRepository>();
+            services.AddScoped<EntityRelationshipRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
