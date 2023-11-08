@@ -11,6 +11,7 @@ namespace DotnetApi.Models
     public DbSet<Attribute> Attribute { get; set; }
     public DbSet<AttributeType> AttributeType { get; set; }
     public DbSet<Record> Record { get; set; }
+    public DbSet<EntityRelationship> EntityRelationship { get; set; }
 
     // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     // => optionsBuilder.UseNpgsql("Host=localhost;Database=localdb;Username=user;Password=password");
