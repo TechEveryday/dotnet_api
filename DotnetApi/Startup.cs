@@ -52,6 +52,7 @@ namespace DotnetApi
             services.AddScoped<EntityTypeService>();
             services.AddScoped<RecordService>();
             services.AddScoped<EntityRelationshipService>();
+            services.AddScoped<S3Service>();
 
             services.AddScoped<AppRepository>();
             services.AddScoped<AttributeRepository>();
