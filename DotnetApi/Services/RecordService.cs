@@ -8,16 +8,40 @@ namespace DotnetApi.Services
   public class RecordService
   {
     private readonly RecordRepository _recordRepository;
+    private readonly EntityRepository _entityRepository;
+    private readonly AttributeRepository _attributeRepository;
+    private readonly S3Service _s3Service;
 
-    public RecordService(RecordRepository recordRepository)
+    public RecordService(
+      RecordRepository recordRepository,
+      EntityRepository entityRepository,
+      AttributeRepository attributeRepository,
+      S3Service s3Service
+    )
     {
       _recordRepository = recordRepository;
+      _entityRepository = entityRepository;
+      _attributeRepository = attributeRepository;
+      _s3Service = s3Service;
     }
 
     public Record create(Record record)
     {
       if (!this.ValidateModel(record))
         throw new Exception("Invalid record model");
+
+      // If the record is a photo, upload it to S3 and replace the value with the S3 bucket URL
+      Entity existingEntity = _entityRepository.GetById(record.EntityId).First();
+      Models.Attribute existingAttribute = _attributeRepository.GetById(record.AttributeId).First();
+      if (existingEntity != null
+        && existingEntity.TypeId == 4 // Package
+        && existingAttribute != null
+        && existingAttribute.TypeId == 19 // photo_bytes
+      )
+      {
+        string s3BucketUrl = _s3Service.WritingAnObject(record.EntityId, record.Value);
+        record.Value = s3BucketUrl;
+      }
 
       return _recordRepository.Create(record);
     }
