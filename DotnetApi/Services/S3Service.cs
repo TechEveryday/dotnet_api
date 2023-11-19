@@ -15,7 +15,7 @@ namespace DotnetApi.Services
 
     public S3Service()
     {
-      client = new AmazonS3Client();
+      client = new AmazonS3Client(System.Environment.GetEnvironmentVariable("AWS_KEY"), System.Environment.GetEnvironmentVariable("AWS_SECRET"));
     }
 
     public string WritingAnObject(Guid entityId, string imageBytes)
