@@ -1,9 +1,6 @@
-using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace DotnetApi.Services
 {
@@ -15,7 +12,7 @@ namespace DotnetApi.Services
 
     public S3Service()
     {
-      client = new AmazonS3Client(System.Environment.GetEnvironmentVariable("AWS_KEY"), System.Environment.GetEnvironmentVariable("AWS_SECRET"));
+      client = new AmazonS3Client(Environment.GetEnvironmentVariable("AWS_KEY"), Environment.GetEnvironmentVariable("AWS_SECRET"));
     }
 
     public string WritingAnObject(Guid entityId, string imageBytes)
