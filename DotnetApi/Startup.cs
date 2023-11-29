@@ -77,12 +77,6 @@ namespace DotnetApi
 
             app.UseRouting();
 
-            // enables cors
-            app.UseCors(builder => builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-            );
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
