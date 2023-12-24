@@ -50,6 +50,7 @@ namespace DotnetApi.Controllers
     {
       try
       {
+        System.Console.WriteLine("entity_id: " + entity.Id);
         _entityService.create(entity);
         return Ok(entity);
       }
