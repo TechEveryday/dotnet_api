@@ -25,10 +25,8 @@ namespace DotnetApi.Repositories
 
     public Guid Create(Entity entity)
     {
-      // _dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[entity] ON");
       _dbContext.Add<Entity>(entity);
       _dbContext.SaveChanges();
-      // _dbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[entity] OFF");
 
       return entity.Id;
     }
