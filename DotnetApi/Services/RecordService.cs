@@ -2,6 +2,7 @@ using DotnetApi.Models;
 using DotnetApi.Repositories;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DotnetApi.Services
 {
@@ -25,7 +26,7 @@ namespace DotnetApi.Services
       _s3Service = s3Service;
     }
 
-    public Record create(Record record)
+    public async Task<Record> create(Record record)
     {
       if (!this.ValidateModel(record))
         throw new Exception("Invalid record model");
@@ -39,7 +40,7 @@ namespace DotnetApi.Services
         && existingAttribute.TypeId == 19 // photo_bytes
       )
       {
-        string s3BucketUrl = _s3Service.WritingAnObject(record.EntityId, record.Value);
+        var s3BucketUrl = await _s3Service.WritingAnObject(record.EntityId, record.Value);
         record.Value = s3BucketUrl;
       }
 

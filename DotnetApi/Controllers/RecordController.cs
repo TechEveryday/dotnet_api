@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using DotnetApi.Models;
 using DotnetApi.Services;
+using System.Threading.Tasks;
 
 namespace DotnetApi.Controllers
 {
@@ -46,17 +47,19 @@ namespace DotnetApi.Controllers
 
     [HttpPost]
     [Route("record")]
-    public IActionResult CreateRecord([FromBody] Record record)
+    public async Task<Record> CreateRecord([FromBody] Record record)
     {
       try
       {
-        _recordService.create(record);
-        return Ok(record);
+        return await _recordService.create(record);
+        // return Ok(record);
       }
       catch (Exception e)
       {
-        return StatusCode(StatusCodes.Status500InternalServerError,
-            $"Error creating new record: {e.Message}");
+        Console.WriteLine($"Error creating new record: {e.Message}");
+        return null;
+        // return StatusCode(StatusCodes.Status500InternalServerError,
+        // $"Error creating new record: {e.Message}");
       }
     }
 

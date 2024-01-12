@@ -2,7 +2,9 @@ using Amazon;
 using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.S3.Model;
+using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace DotnetApi.Services
 {
@@ -17,12 +19,12 @@ namespace DotnetApi.Services
       var clientCredentials = new BasicAWSCredentials(Environment.GetEnvironmentVariable("AWS_KEY"), Environment.GetEnvironmentVariable("AWS_SECRET"));
       var config = new AmazonS3Config
       {
-        RegionEndpoint = RegionEndpoint.USEast1
+        RegionEndpoint = RegionEndpoint.USEast2
       };
       client = new AmazonS3Client(clientCredentials, config);
     }
 
-    public string WritingAnObject(Guid entityId, string imageBytes)
+    public async Task<string> WritingAnObject(Guid entityId, string imageBytes)
     {
       try
       {
@@ -39,23 +41,33 @@ namespace DotnetApi.Services
           ContentType = "image/jpeg"
         };
 
-        PutObjectResponse response1 = client.PutObject(putRequest1);
+        PutObjectResponse response1 = await client.PutObjectAsync(putRequest1);
 
-        return $"bucketName/{randomBucketInt}";
+        if (response1.HttpStatusCode == System.Net.HttpStatusCode.OK)
+        {
+          Console.WriteLine($"Successfully uploaded {entityId.ToString()} to {bucketName}.");
+          return $"bucketName/{randomBucketInt}";
+        }
+        else
+        {
+          Console.WriteLine($"Could not upload {entityId.ToString()} to {bucketName}.");
+          return null;
+        }
+
       }
       catch (AmazonS3Exception e)
       {
         Console.WriteLine(
                 "Error encountered ***. Message:'{0}' when writing an object"
                 , e.Message);
-        return "";
+        return null;
       }
       catch (Exception e)
       {
         Console.WriteLine(
             "Unknown encountered on server. Message:'{0}' when writing an object"
             , e.Message);
-        return "";
+        return null;
       }
     }
   }
