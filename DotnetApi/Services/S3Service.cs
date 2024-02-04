@@ -72,9 +72,9 @@ namespace DotnetApi.Services
         {
           BucketName = $"{bucketName}/1",
           Key = "test.txt",
-          ContentBody = "This is a test",
+          ContentBody = "This is a test"
           // ContentType = "text/plain",
-          FilePath = "test.txt"
+          // FilePath = "test.txt"
         };
 
         PutObjectResponse response = await client.PutObjectAsync(putRequest1);

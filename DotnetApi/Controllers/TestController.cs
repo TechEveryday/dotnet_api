@@ -24,7 +24,7 @@ namespace DotnetApi.Controllers
 
     [HttpGet]
     [Route("test/getObject")]
-    public IActionResult GetApps()
+    public IActionResult GetObject()
     {
       return Ok(_s3Service.GetObjectInBucket1());
     }
