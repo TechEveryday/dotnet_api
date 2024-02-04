@@ -30,8 +30,8 @@ namespace DotnetApi.Services
       {
         GetObjectRequest request = new GetObjectRequest
         {
-          BucketName = $"test-bucket-1",
-          Key = "test.txt"
+          BucketName = $"{bucketName}",
+          Key = "1/test.txt"
         };
 
         GetObjectResponse response = await client.GetObjectAsync(request);
@@ -70,8 +70,8 @@ namespace DotnetApi.Services
         // 1. Put object-specify only key name for the new object.
         var putRequest1 = new PutObjectRequest
         {
-          BucketName = $"test-bucket-1",
-          Key = "test.txt",
+          BucketName = $"{bucketName}",
+          Key = "1/test.txt",
           ContentBody = "This is a test"
           // ContentType = "text/plain",
           // FilePath = "test.txt"
