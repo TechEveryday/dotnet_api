@@ -30,7 +30,7 @@ namespace DotnetApi.Services
       {
         GetObjectRequest request = new GetObjectRequest
         {
-          BucketName = $"{bucketName}",
+          BucketName = $"test-bucket-1",
           Key = "test.txt"
         };
 
@@ -70,7 +70,7 @@ namespace DotnetApi.Services
         // 1. Put object-specify only key name for the new object.
         var putRequest1 = new PutObjectRequest
         {
-          BucketName = $"{bucketName}",
+          BucketName = $"test-bucket-1",
           Key = "test.txt",
           ContentBody = "This is a test"
           // ContentType = "text/plain",
