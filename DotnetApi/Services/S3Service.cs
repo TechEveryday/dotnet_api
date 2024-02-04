@@ -30,7 +30,7 @@ namespace DotnetApi.Services
       {
         GetObjectRequest request = new GetObjectRequest
         {
-          BucketName = $"{bucketName}/1",
+          BucketName = $"{bucketName}",
           Key = "test.txt"
         };
 
@@ -70,7 +70,7 @@ namespace DotnetApi.Services
         // 1. Put object-specify only key name for the new object.
         var putRequest1 = new PutObjectRequest
         {
-          BucketName = $"{bucketName}/1",
+          BucketName = $"{bucketName}",
           Key = "test.txt",
           ContentBody = "This is a test"
           // ContentType = "text/plain",
@@ -93,14 +93,14 @@ namespace DotnetApi.Services
       catch (AmazonS3Exception e)
       {
         Console.WriteLine(
-                "Error encountered ***. Message:'{0}' when creating a bucket"
+                "Error encountered ***. Message:'{0}' when creating a object"
                 , e.Message);
         return false;
       }
       catch (Exception e)
       {
         Console.WriteLine(
-            "Unknown encountered on server. Message:'{0}' when creating a bucket"
+            "Unknown encountered on server. Message:'{0}' when creating a object"
             , e.Message);
         return false;
       }
