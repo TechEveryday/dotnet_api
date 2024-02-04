@@ -26,7 +26,15 @@ namespace DotnetApi.Controllers
     [Route("test/getObject")]
     public IActionResult GetObject()
     {
-      return Ok(_s3Service.GetObjectInBucket1());
+      try {
+        _s3Service.GetObjectInBucket1();
+        return Ok();
+      }
+      catch (Exception e)
+      {
+        return StatusCode(StatusCodes.Status500InternalServerError,
+            $"Didnt work: {e.Message}");
+      }
     }
 
     // [HttpGet]
