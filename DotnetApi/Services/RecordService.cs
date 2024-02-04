@@ -40,8 +40,9 @@ namespace DotnetApi.Services
         && existingAttribute.TypeId == 19 // photo_bytes
       )
       {
-        var s3BucketUrl = await _s3Service.WritingAnObject(record.EntityId, record.Value);
-        record.Value = s3BucketUrl;
+        System.Console.WriteLine("NOT ACTUALLY Uploading photo to S3");
+        // var s3BucketUrl = await _s3Service.WritingAnObject(record.EntityId, record.Value);
+        // record.Value = s3BucketUrl;
       }
 
       return _recordRepository.Create(record);
@@ -86,7 +87,7 @@ namespace DotnetApi.Services
     // }
 
     /**
-     * @param City appToValidate
+     * @param Record recordToValidate
      * @return bool - returns false if the model is invalid
      */
     public bool ValidateModel(Record recordToValidate)

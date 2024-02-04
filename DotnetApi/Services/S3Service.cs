@@ -24,51 +24,133 @@ namespace DotnetApi.Services
       client = new AmazonS3Client(clientCredentials, config);
     }
 
-    public async Task<string> WritingAnObject(Guid entityId, string imageBytes)
+    public async Task<bool> GetObjectInBucket1()
     {
       try
       {
-        // Pick a random number so that the single bucket doesn't get too big that we can't filter
-        Random rand = new Random();
-        string randomBucketInt = rand.Next(1, 10).ToString();
-
-        // 1. Put object-specify only key name for the new object.
-        var putRequest1 = new PutObjectRequest
+        GetObjectRequest request = new GetObjectRequest
         {
-          BucketName = $"bucketName/{randomBucketInt}",
-          Key = entityId.ToString(),
-          ContentBody = imageBytes,
-          ContentType = "image/jpeg"
+          BucketName = $"{bucketName}/1",
+          Key = "test.txt"
         };
 
-        PutObjectResponse response1 = await client.PutObjectAsync(putRequest1);
+        GetObjectResponse response = await client.GetObjectAsync(request);
 
-        if (response1.HttpStatusCode == System.Net.HttpStatusCode.OK)
+        if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
         {
-          Console.WriteLine($"Successfully uploaded {entityId.ToString()} to {bucketName}.");
-          return $"bucketName/{randomBucketInt}";
+          Console.WriteLine($"Successfully got {bucketName}.");
+          return true;
         }
         else
         {
-          Console.WriteLine($"Could not upload {entityId.ToString()} to {bucketName}.");
-          return null;
+          Console.WriteLine($"Could not get {bucketName}.");
+          return false;
         }
-
       }
       catch (AmazonS3Exception e)
       {
         Console.WriteLine(
-                "Error encountered ***. Message:'{0}' when writing an object"
+                "Error encountered ***. Message:'{0}' when getting an object"
                 , e.Message);
-        return null;
+        return false;
       }
       catch (Exception e)
       {
         Console.WriteLine(
-            "Unknown encountered on server. Message:'{0}' when writing an object"
+            "Unknown encountered on server. Message:'{0}' when getting an object"
             , e.Message);
-        return null;
+        return false;
       }
     }
+
+    public async Task<bool> CreateTxtFileInBucket1()
+    {
+      try
+      {
+        // 1. Put object-specify only key name for the new object.
+        var putRequest1 = new PutObjectRequest
+        {
+          BucketName = $"{bucketName}/1",
+          Key = "test.txt",
+          ContentBody = "This is a test",
+          // ContentType = "text/plain",
+          FilePath = "test.txt"
+        };
+
+        PutObjectResponse response = await client.PutObjectAsync(putRequest1);
+
+        if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
+        {
+          Console.WriteLine($"Successfully created {bucketName}.");
+          return true;
+        }
+        else
+        {
+          Console.WriteLine($"Could not create {bucketName}.");
+          return false;
+        }
+      }
+      catch (AmazonS3Exception e)
+      {
+        Console.WriteLine(
+                "Error encountered ***. Message:'{0}' when creating a bucket"
+                , e.Message);
+        return false;
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(
+            "Unknown encountered on server. Message:'{0}' when creating a bucket"
+            , e.Message);
+        return false;
+      }
+    }
+
+    // public async Task<string> WritingAnObject(Guid entityId, string imageBytes)
+    // {
+    //   try
+    //   {
+    //     // Pick a random number so that the single bucket doesn't get too big that we can't filter
+    //     Random rand = new Random();
+    //     string randomBucketInt = rand.Next(1, 10).ToString();
+
+    //     // 1. Put object-specify only key name for the new object.
+    //     var putRequest1 = new PutObjectRequest
+    //     {
+    //       BucketName = $"{bucketName}/{randomBucketInt}",
+    //       Key = entityId.ToString(),
+    //       ContentBody = imageBytes,
+    //       ContentType = "image/jpeg"
+    //     };
+
+    //     PutObjectResponse response1 = await client.PutObjectAsync(putRequest1);
+
+    //     if (response1.HttpStatusCode == System.Net.HttpStatusCode.OK)
+    //     {
+    //       Console.WriteLine($"Successfully uploaded {entityId.ToString()} to {bucketName}.");
+    //       return $"{bucketName}/{randomBucketInt}";
+    //     }
+    //     else
+    //     {
+    //       Console.WriteLine($"Could not upload {entityId.ToString()} to {bucketName}.");
+    //       return null;
+    //     }
+
+    //   }
+    //   catch (AmazonS3Exception e)
+    //   {
+    //     Console.WriteLine(
+    //             "Error encountered ***. Message:'{0}' when writing an object"
+    //             , e.Message);
+    //     return null;
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     Console.WriteLine(
+    //         "Unknown encountered on server. Message:'{0}' when writing an object"
+    //         , e.Message);
+    //     return null;
+    //   }
+    // }
   }
 }
