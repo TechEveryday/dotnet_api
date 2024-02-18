@@ -23,43 +23,46 @@ namespace DotnetApi.Services
       };
       client = new AmazonS3Client(clientCredentials, config);
     }
-
-    public async Task<bool> GetObjectInBucket1()
+    // not tested if stream is returned.
+    public async Task<Stream> GetObjectInBucket1(
+      string bucket = "track-my-pack-prd",
+      string keyName = "1/test.txt"
+    )
     {
       try
       {
         GetObjectRequest request = new GetObjectRequest
         {
-          BucketName = $"{bucketName}",
-          Key = "1/test.txt"
+          BucketName = bucketName,
+          Key = keyName
         };
 
         GetObjectResponse response = await client.GetObjectAsync(request);
 
         if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
         {
-          Console.WriteLine($"Successfully got {bucketName}.");
-          return true;
+          Console.WriteLine($"Successfully got {bucketName}/{keyName}.");
+          return response.ResponseStream;
         }
         else
         {
-          Console.WriteLine($"Could not get {bucketName}.");
-          return false;
+          Console.WriteLine($"Could not get {bucketName}/{keyName}.");
+          throw new Exception($"Could not get {bucketName}/{keyName}.");
         }
       }
       catch (AmazonS3Exception e)
       {
         Console.WriteLine(
-                "Error encountered ***. Message:'{0}' when getting an object"
-                , e.Message);
-        return false;
+                $"Error encountered ***. Message:'{e.Message}' when getting an object"
+                );
+        throw e;
       }
       catch (Exception e)
       {
         Console.WriteLine(
-            "Unknown encountered on server. Message:'{0}' when getting an object"
-            , e.Message);
-        return false;
+            $"Unknown encountered on server. Message:'{e.Message}' when getting an object"
+            );
+        throw e;
       }
     }
 
@@ -104,6 +107,95 @@ namespace DotnetApi.Services
             , e.Message);
         return false;
       }
+    }
+
+    public async Task<string> CreateFileInBucket(
+      string base64EncodedByteString
+      string keyName = "test.txt",
+      string bucket = "track-my-pack-prd",
+    )
+    {
+      try
+      {
+        Random rand = new Random();
+        string randomBucketInt = rand.Next(1, 10).ToString();
+
+        string url = await GeneratePresignedUrl(bucket, $"{randomBucketInt}/{keyName}");
+        if (url == null)
+        {
+          return "";
+        }
+
+        var successfullyUploaded = await UploadObject(base64EncodedByteString, url);
+        if (successfullyUploaded)
+        {
+          Console.WriteLine($"Successfully uploaded {keyName} to {bucket}.");
+          return url;
+        }
+        else
+        {
+          Console.WriteLine($"Could not upload {keyName} to {bucket}.");
+          return "";
+        }
+      }
+      catch (AmazonS3Exception e)
+      {
+        Console.WriteLine(
+                "Error encountered ***. Message:'{0}' when creating a object"
+                , e.Message);
+        return "";
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(
+            "Unknown encountered on server. Message:'{0}' when creating a object"
+            , e.Message);
+        return false;
+      }
+    }
+
+    private async Task<string> GeneratePresignedUrl(
+      string bucket = "track-my-pack-prd",
+      string keyName = "1/test.txt"
+    )
+    {
+      try
+      {
+        GetPreSignedUrlRequest request = new GetPreSignedUrlRequest
+        {
+          BucketName = bucket,
+          Key = keyName,
+          Verb = HttpVerb.PUT,
+          Expires = DateTime.Now.AddMinutes(5)
+        };
+
+        return client.GetPreSignedURL(request).ToString();
+      }
+      catch (AmazonS3Exception e)
+      {
+        Console.WriteLine(
+                "Error encountered ***. Message:'{0}' when generating a presigned URL"
+                , e.Message);
+        return null;
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(
+            "Unknown encountered on server. Message:'{0}' when generating a presigned URL"
+            , e.Message);
+        return null;
+      }
+    }
+
+    private static async Task<bool> UploadObject(string base64EncodedByteString, string url)
+    {
+      // using var streamContent = new StreamContent(
+      //     new FileStream(filePath, FileMode.Open, FileAccess.Read));
+      using var streamContent = new StreamContent(
+          new System.IO.MemoryStream(Convert.FromBase64String(base64EncodedByteString)));
+
+      var response = await httpClient.PutAsync(url, streamContent);
+      return response.IsSuccessStatusCode;
     }
 
     // public async Task<string> WritingAnObject(Guid entityId, string imageBytes)

@@ -37,12 +37,21 @@ namespace DotnetApi.Services
       if (existingEntity != null
         && existingEntity.TypeId == 4 // Package
         && existingAttribute != null
-        && existingAttribute.TypeId == 19 // photo_bytes
+        // && existingAttribute.TypeId == 19 // photo_bytes
+        && existingAttribute.TypeId == 16 // image url
       )
       {
-        System.Console.WriteLine("NOT ACTUALLY Uploading photo to S3");
+        var s3BucketUrl = await _s3Service.CreateFileInBucket(
+          record.Value, //at this point its a string of bytes
+          record.EntityId
+        );
         // var s3BucketUrl = await _s3Service.WritingAnObject(record.EntityId, record.Value);
-        // record.Value = s3BucketUrl;
+        record.Value = s3BucketUrl; //when storing the value in the db, it should be the URL
+
+        if (record.Value == null)
+        {
+          throw new Exception("Record value is required");
+        }
       }
 
       return _recordRepository.Create(record);

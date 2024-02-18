@@ -22,13 +22,24 @@ namespace DotnetApi.Controllers
       _s3Service = s3Service;
     }
 
+    // Open question - do I even need this endpoint? Looks like
+    // as long as apps know the full URL then it can be accessed
     [HttpGet]
     [Route("test/getObject")]
-    public IActionResult GetObject()
+    public IActionResult GetObject(
+      [FromQuery] string bucket,
+      [FromQuery] string keyName
+    )
     {
-      try {
-        _s3Service.GetObjectInBucket1();
-        return Ok();
+      try
+      {
+        var s3Object = _s3Service.GetObjectInBucket1(bucket, keyName);
+        if (!s3Object)
+        {
+          return StatusCode(StatusCodes.Status500InternalServerError,
+              $"Didnt work");
+        }
+        return Ok(s3Object);
       }
       catch (Exception e)
       {
