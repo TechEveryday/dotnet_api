@@ -4,6 +4,7 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
