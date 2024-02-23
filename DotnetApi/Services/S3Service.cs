@@ -4,6 +4,7 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace DotnetApi.Services
@@ -150,7 +151,7 @@ namespace DotnetApi.Services
         Console.WriteLine(
             "Unknown encountered on server. Message:'{0}' when creating a object"
             , e.Message);
-        return false;
+        return "";
       }
     }
 
@@ -194,6 +195,7 @@ namespace DotnetApi.Services
       using var streamContent = new StreamContent(
           new System.IO.MemoryStream(Convert.FromBase64String(base64EncodedByteString)));
 
+      var httpClient = new HttpClient();
       var response = await httpClient.PutAsync(url, streamContent);
       return response.IsSuccessStatusCode;
     }
