@@ -112,7 +112,7 @@ namespace DotnetApi.Services
     public async Task<string> CreateFileInBucket(
       string base64EncodedByteString,
       string keyName = "test.txt",
-      string bucket = "track-my-pack-prd",
+      string bucket = "track-my-pack-prd"
     )
     {
       try
