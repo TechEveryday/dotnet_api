@@ -64,7 +64,7 @@ namespace DotnetApi.Services
         Console.WriteLine(
             $"Unknown encountered on server. Message:'{e.Message}' when getting an object"
             );
-        throw e;
+        throw;
       }
     }
 
@@ -122,7 +122,7 @@ namespace DotnetApi.Services
         Random rand = new Random();
         string randomBucketInt = rand.Next(1, 10).ToString();
 
-        string url = await GeneratePresignedUrl(bucket, $"{randomBucketInt}/{keyName}");
+        string url = GeneratePresignedUrl(bucket, $"{randomBucketInt}/{keyName}");
         if (url == null)
         {
           return "";
@@ -156,7 +156,7 @@ namespace DotnetApi.Services
       }
     }
 
-    private async Task<string> GeneratePresignedUrl(
+    private string GeneratePresignedUrl(
       string bucket = "track-my-pack-prd",
       string keyName = "1/test.txt"
     )

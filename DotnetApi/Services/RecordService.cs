@@ -43,7 +43,7 @@ namespace DotnetApi.Services
       {
         var s3BucketUrl = await _s3Service.CreateFileInBucket(
           record.Value, //at this point its a string of bytes
-          record.EntityId
+          record.EntityId.ToString()
         );
         // var s3BucketUrl = await _s3Service.WritingAnObject(record.EntityId, record.Value);
         record.Value = s3BucketUrl; //when storing the value in the db, it should be the URL

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using DotnetApi.Models;
 using DotnetApi.Services;
+using System.Threading.Tasks;
 
 namespace DotnetApi.Controllers
 {
@@ -26,15 +27,15 @@ namespace DotnetApi.Controllers
     // as long as apps know the full URL then it can be accessed
     [HttpGet]
     [Route("test/getObject")]
-    public IActionResult GetObject(
+    public async Task<IActionResult> GetObject(
       [FromQuery] string bucket,
       [FromQuery] string keyName
     )
     {
       try
       {
-        var s3Object = _s3Service.GetObjectInBucket1(bucket, keyName);
-        if (!s3Object)
+        var s3Object = await _s3Service.GetObjectInBucket1(bucket, keyName);
+        if (s3Object == null)
         {
           return StatusCode(StatusCodes.Status500InternalServerError,
               $"Didnt work");
